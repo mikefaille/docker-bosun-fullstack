@@ -12,7 +12,7 @@ RUN yum install -y wget git tar java-1.8.0-openjdk-headless vim
 ENV JAVA_HOME /usr/lib/jvm/jre
 
 
-RUN wget https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz && tar -C /usr/local -xzf /go$VERSION.linux-$ARCH.tar.gz && rm /go$VERSION.linux-$ARCH.tar.gz && \
+RUN wget https://storage.googleapis.com/golang/go$VERSION.linux-amd64.tar.gz && tar -C /usr/local -xzf /go$VERSION.linux-$ARCH.tar.gz && rm /go$VERSION.linux-$ARCH.tar.gz && \
     wget http://apache.mirror.vexxhost.com/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz && cd /hbase && tar -xzf /hbase-$HBASE_VERSION-bin.tar.gz && rm /hbase-$HBASE_VERSION-bin.tar.gz
 
 RUN mkdir /go
@@ -24,8 +24,8 @@ VOLUME /data/persistant/hbase
 RUN  mkdir /hbase
 
 ADD conf/hbase-site.xml /hbase/hbase-$HBASE_VERSION/conf/hbase-site.xml
-ADD lib/hadoop-lzo-0.4.20-SNAPSHOT.jar /hbase/hbase-1.1.0.1/lib/hadoop-lzo-0.4.20-SNAPSHOT.jar
-ADD lib/libgplcompression.so /hbase/hbase-1.1.0.1/lib/native/libgplcompression.so
+ADD lib/hadoop-lzo-0.4.20-SNAPSHOT.jar /hbase/hbase-$HBASE_VERSION/lib/hadoop-lzo-0.4.20-SNAPSHOT.jar
+ADD lib/libgplcompression.so /hbase/hbase-$HBASE_VERSION/lib/native/libgplcompression.so
 
 RUN yum install https://github.com/OpenTSDB/opentsdb/releases/download/v2.1.0/opentsdb-2.1.0.noarch.rpm -y
 ADD conf/start-opentsdb.sh /data/start-opentsdb.sh
