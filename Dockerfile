@@ -13,7 +13,7 @@ ENV JAVA_HOME /usr/lib/jvm/jre
 
 
 RUN wget https://storage.googleapis.com/golang/go$VERSION.linux-amd64.tar.gz && tar -C /usr/local -xzf /go$VERSION.linux-$ARCH.tar.gz && rm /go$VERSION.linux-$ARCH.tar.gz && \
-    wget http://apache.mirror.vexxhost.com/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz && cd /hbase && tar -xzf /hbase-$HBASE_VERSION-bin.tar.gz && rm /hbase-$HBASE_VERSION-bin.tar.gz
+    wget http://apache.mirror.vexxhost.com/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz && mkdir /hbase && cd /hbase && tar -xzf /hbase-$HBASE_VERSION-bin.tar.gz && rm /hbase-$HBASE_VERSION-bin.tar.gz
 
 RUN mkdir /go
 ENV GOPATH  /go
@@ -21,7 +21,7 @@ ENV GOROOT /usr/local/go
 ENV PATH $PATH:/usr/local/go/bin:/go/bin
 RUN go get bosun.org/cmd/bosun
 VOLUME /data/persistant/hbase
-RUN  mkdir /hbase
+
 
 ADD conf/hbase-site.xml /hbase/hbase-$HBASE_VERSION/conf/hbase-site.xml
 ADD lib/hadoop-lzo-0.4.20-SNAPSHOT.jar /hbase/hbase-$HBASE_VERSION/lib/hadoop-lzo-0.4.20-SNAPSHOT.jar
