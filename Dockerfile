@@ -15,17 +15,19 @@ RUN echo "pub  4096R/F4A80EB5 2014-06-23 CentOS-7 Key (CentOS 7 Official Signing
 RUN yum install -y wget git tar java-1.8.0-openjdk-headless vim supervisord; mkdir /var/log/supervisor
 
 # Supervisor
-ADD conf/supervisord.conf /etc/supervisord.conf
 ADD conf/supervisor-bosun.ini /etc/supervisor.d/bosun.ini
 ADD conf/supervisor-base.ini /etc/supervisor.d/base.ini
-ADD conf/supervisor/supervisor-hbase.ini /etc/supervisor.d/hbase.ini
-ADD conf/supervisor/supervisor-opentsdb.ini /etc/supervisor.d/opentsdb.ini
+ADD conf/supervisor-hbase.ini /etc/supervisor.d/hbase.ini
+ADD conf/supervisor-opentsdb.ini /etc/supervisor.d/opentsdb.ini
 ADD conf/supervisor-bosun.ini /etc/supervisor.d/scollector.ini
+
 ENV JAVA_HOME /usr/lib/jvm/jre
 
+ENV WORKDIR /data
+WORKDIR $WORKDIR /data
 
-RUN wget https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz && tar -C /usr/local -xzf /GO_$GO_VERSION.linux-$ARCH.tar.gz && rm /go$GO_VERSION.linux-$ARCH.tar.gz && \
-    wget http://apache.mirror.vexxhost.com/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz && mkdir /hbase && cd /hbase && tar -xzf /hbase-$HBASE_VERSION-bin.tar.gz && rm /hbase-$HBASE_VERSION-bin.tar.gz
+RUN wget https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz  && tar -C /usr/local -xzf go$GO_VERSION.linux-$ARCH.tar.gz && rm go$GO_VERSION.linux-$ARCH.tar.gz && \
+    mkdir /hbase && cd /hbase && wget http://apache.mirror.vexxhost.com/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz  && tar -xzf hbase-$HBASE_VERSION-bin.tar.gz && rm hbase-$HBASE_VERSION-bin.tar.gz
 
 
 
