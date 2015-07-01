@@ -3,9 +3,9 @@
 echo "Sleeping for 30 seconds to give HBase time to warm up"
 stopwaitsecs=60
 
-if [ ! -e $TSDB/opentsdb_tables_created.txt ]; then
+if [ ! -e /data/persitant/opentsdb_tables_created.txt ]; then
     echo "creating tsdb tables"
-    bash $TSDB/create_tsdb_tables.sh
+    bash /data/persistant/create_tsdb_tables.sh
     echo "created tsdb tables"
 fi
 
