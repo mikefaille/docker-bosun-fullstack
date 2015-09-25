@@ -3,16 +3,16 @@ MAINTAINER michael@faille.io <michael@faille.io>
 
 
 # Options as variables
-ENV GO_VERSION 1.4.2
+ENV GO_VERSION 1.5.1
 ENV ARCH amd64
-ENV HBASE_VERSION 1.1.0.1
+ENV HBASE_VERSION 1.1.2
 ENV HBASE_HOME /hbase/hbase-$HBASE_VERSION
 ENV HBASE $HBASE_HOME
 ENV OPENTSDB_DIR /tsdb
 ENV COMPRESSION gz
 
-# ENV http_proxy http://172.17.42.1:3128
-# ENV https_proxy $http_proxy
+ENV http_proxy http://172.17.42.1:3128
+ENV https_proxy $http_proxy
 
 #RUN sed -i 's/mirrorlist=/#mirrorlist=/g' /etc/yum.repos.d/CentOS-Base.repo && sed -i 's/#baseurl=/baseurl=/g' /etc/yum.repos.d/CentOS-Base.repo && sed -i 's/mirrorlist=/#mirrorlist=/g' /etc/yum.repos.d/CentOS-update.repo && sed -i 's/#baseurl=/baseurl=/g' /etc/yum.repos.d/CentOS-update.repo
 RUN sed -i 's/mirrorlist=/#mirrorlist=/g' /etc/yum.repos.d/*.repo && sed -i 's/#baseurl=/baseurl=/g' /etc/yum.repos.d/*.repo
@@ -36,10 +36,10 @@ ENV JAVA_HOME /usr/lib/jvm/jre
 ENV WORKDIR /data
 
 # GO
-RUN mkdir /go
+RUN mkdir /usr/local/go/
 ENV GOPATH  /go
-ENV GOROOT /usr/local/go
-ENV PATH $PATH:/usr/local/go/bin:/go/bi
+ENV GOROOT /usr/local/go/
+ENV PATH $PATH:/usr/local/go/bin
 
 
 WORKDIR $WORKDIR
