@@ -11,8 +11,8 @@ ENV HBASE $HBASE_HOME
 ENV OPENTSDB_DIR /tsdb
 ENV COMPRESSION gz
 
-ENV http_proxy http://172.17.42.1:3128
-ENV https_proxy $http_proxy
+# ENV http_proxy http://172.17.42.1:3128
+# ENV https_proxy $http_proxy
 
 #RUN sed -i 's/mirrorlist=/#mirrorlist=/g' /etc/yum.repos.d/CentOS-Base.repo && sed -i 's/#baseurl=/baseurl=/g' /etc/yum.repos.d/CentOS-Base.repo && sed -i 's/mirrorlist=/#mirrorlist=/g' /etc/yum.repos.d/CentOS-update.repo && sed -i 's/#baseurl=/baseurl=/g' /etc/yum.repos.d/CentOS-update.repo
 RUN sed -i 's/mirrorlist=/#mirrorlist=/g' /etc/yum.repos.d/*.repo && sed -i 's/#baseurl=/baseurl=/g' /etc/yum.repos.d/*.repo
