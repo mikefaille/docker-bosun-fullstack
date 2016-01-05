@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+echo "127.0.0.1 localhost $( cat  /proc/sys/kernel/hostname)" > /etc/hosts
 trap "echo stopping hbase;$HBASE/bin/hbase master stop>>/var/log/hbase-stop.log 2>&1; exit" HUP INT TERM EXIT
 echo "starting hbase"
 
